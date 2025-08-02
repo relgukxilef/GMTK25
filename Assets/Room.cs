@@ -23,7 +23,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
         Instantiate<Board>(source).frozen = true;
         // move source to next time step, maybe animated
         source.transform.position += new Vector3(game.timeOffset, 0, 0);
-        // copy target if it's frozen
+        // copy target to know timeline if it's in the past
         if (target.frozen)
         {
             var startLine = target.transform.position;

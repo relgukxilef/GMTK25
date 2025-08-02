@@ -15,8 +15,6 @@ public class Game : MonoBehaviour
     public GameObject timeLineSprite;
     public TimeLineSplit timeLineSplit;
 
-    // TODO: Allow zooming and panning of camera
-
     // Start is called before the first frame update
     void Start()
     {
