@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: game
       value: 
       objectReference: {fileID: 1105982276}
+    - target: {fileID: 6431776037253990786, guid: 1f5164d65be89034e86861bc3ac416f2, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 1791686348}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -244,6 +248,10 @@ PrefabInstance:
       propertyPath: game
       value: 
       objectReference: {fileID: 1105982276}
+    - target: {fileID: 6431776037253990786, guid: 1f5164d65be89034e86861bc3ac416f2, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 1791686348}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -456,6 +464,10 @@ PrefabInstance:
       propertyPath: game
       value: 
       objectReference: {fileID: 1105982276}
+    - target: {fileID: 6431776037253990786, guid: 1f5164d65be89034e86861bc3ac416f2, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 1791686348}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -522,6 +534,10 @@ PrefabInstance:
       propertyPath: game
       value: 
       objectReference: {fileID: 1105982276}
+    - target: {fileID: 6431776037253990786, guid: 1f5164d65be89034e86861bc3ac416f2, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 1791686348}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -565,6 +581,7 @@ MonoBehaviour:
   selection: {fileID: 0}
   playerTurn: 1
   enemyTurnTime: 0
+  camera: {fileID: 519420031}
 --- !u!4 &1105982277
 Transform:
   m_ObjectHideFlags: 0
@@ -636,6 +653,10 @@ PrefabInstance:
       propertyPath: game
       value: 
       objectReference: {fileID: 1105982276}
+    - target: {fileID: 6431776037253990786, guid: 1f5164d65be89034e86861bc3ac416f2, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 1791686348}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -702,6 +723,10 @@ PrefabInstance:
       propertyPath: game
       value: 
       objectReference: {fileID: 1105982276}
+    - target: {fileID: 6431776037253990786, guid: 1f5164d65be89034e86861bc3ac416f2, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 1791686348}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -768,6 +793,10 @@ PrefabInstance:
       propertyPath: game
       value: 
       objectReference: {fileID: 1105982276}
+    - target: {fileID: 6431776037253990786, guid: 1f5164d65be89034e86861bc3ac416f2, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 1791686348}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -787,6 +816,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1791686347}
+  - component: {fileID: 1791686348}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -820,6 +850,20 @@ Transform:
   - {fileID: 1215313924199033477}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1791686348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791686346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec591947d3a03b4b8236414e6000a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 1105982276}
+  frozen: 0
 --- !u!1001 &1904442980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -876,6 +920,10 @@ PrefabInstance:
       propertyPath: game
       value: 
       objectReference: {fileID: 1105982276}
+    - target: {fileID: 6431776037253990786, guid: 1f5164d65be89034e86861bc3ac416f2, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 1791686348}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -902,6 +950,10 @@ PrefabInstance:
       propertyPath: game
       value: 
       objectReference: {fileID: 1105982276}
+    - target: {fileID: 3423454061841235344, guid: 296b39ccca319154ba3a64eb937227d6, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 1791686348}
     - target: {fileID: 6218696871948197696, guid: 296b39ccca319154ba3a64eb937227d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1
@@ -1070,6 +1122,10 @@ PrefabInstance:
       propertyPath: game
       value: 
       objectReference: {fileID: 1105982276}
+    - target: {fileID: 6431776037253990786, guid: 1f5164d65be89034e86861bc3ac416f2, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 1791686348}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1085,5 +1141,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 1791686347}
   - {fileID: 1105982277}
+  - {fileID: 1791686347}

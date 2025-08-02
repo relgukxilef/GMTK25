@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Assets\Room.cs" />
     <Compile Include="Assets\Game.cs" />
+    <Compile Include="Assets\Board.cs" />
     <Compile Include="Assets\Agent.cs" />
   </ItemGroup>
   <ItemGroup>

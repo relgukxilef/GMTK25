@@ -5,13 +5,18 @@ using UnityEngine.EventSystems;
 
 public class Agent : MonoBehaviour, IPointerClickHandler
 {
-    public Game game;
+    public Board board;
+    private Game game;
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Hi");
-        if (game.selection)
+        if (board.frozen)
             return;
+        if (game.selection)
+        {
+            game.selection = null;
+            return;
+        }
 
         game.selection = this;
     }
@@ -19,7 +24,7 @@ public class Agent : MonoBehaviour, IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
-        
+        game = board.game;
     }
 
     // Update is called once per frame
