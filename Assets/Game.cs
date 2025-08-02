@@ -12,6 +12,8 @@ public class Game : MonoBehaviour
     public new GameObject camera;
     public int timeOffset, lineOffset;
     public int timelines = 1;
+    public GameObject timeLineSprite;
+    public TimeLineSplit timeLineSplit;
 
     // TODO: Allow zooming and panning of camera
 

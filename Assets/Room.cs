@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -25,19 +26,25 @@ public class Room : MonoBehaviour, IPointerClickHandler
         // copy target if it's frozen
         if (target.frozen)
         {
+            var startLine = target.transform.position;
             target = Instantiate<Board>(target);
             var position = target.transform.position;
             position.y = game.lineOffset * game.timelines;
+            position.x += game.timeOffset;
             target.transform.position = position;
             game.timelines++;
             target.frozen = false;
+            agent.timeTravelCharges--;
+            var split = Instantiate(game.timeLineSplit);
+            split.height = (int)(position.y - startLine.y);
+            split.width = game.timeOffset;
+            split.transform.position = startLine;
         }
         // move agent, maybe animated
         agent.transform.parent = target.transform;
         agent.transform.localPosition = transform.localPosition;
         agent.board = target;
         game.selection = null;
-        game.camera.transform.position = target.transform.position;
     }
 
     // Start is called before the first frame update
