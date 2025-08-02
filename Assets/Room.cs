@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,15 +13,31 @@ public class Room : MonoBehaviour, IPointerClickHandler
     {
         if (!valid)
             return;
-        var oldPosition = game.selection.transform.position;
-        game.selection.transform.position = transform.position;
-        var newBoard = Instantiate(board);
-        var offset = new Vector3(6, 0, 0);
-        newBoard.transform.position += offset;
-        game.selection.transform.position = oldPosition;
+
+        var agent = game.selection;
+        var source = agent.board;
+        var target = board;
+
+        // copy source
+        Instantiate<Board>(source).frozen = true;
+        // move source to next time step, maybe animated
+        source.transform.position += new Vector3(game.timeOffset, 0, 0);
+        // copy target if it's frozen
+        if (target.frozen)
+        {
+            target = Instantiate<Board>(target);
+            var position = target.transform.position;
+            position.y = game.lineOffset * game.timelines;
+            target.transform.position = position;
+            game.timelines++;
+            target.frozen = false;
+        }
+        // move agent, maybe animated
+        agent.transform.parent = target.transform;
+        agent.transform.localPosition = transform.localPosition;
+        agent.board = target;
         game.selection = null;
-        board.frozen = true;
-        game.camera.transform.position += offset;
+        game.camera.transform.position = target.transform.position;
     }
 
     // Start is called before the first frame update
@@ -34,14 +49,22 @@ public class Room : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-        // TODO: fog of war
         valid = false;
         if (game.selection)
         {
             Vector2 offset =
-                game.selection.gameObject.transform.position -
-                transform.position;
+                transform.position -
+                game.selection.gameObject.transform.position;
             if (Math.Abs(offset.x) + Math.Abs(offset.y) == 1)
+            {
+                valid = true;
+            }
+            if (
+                game.selection.timeTravelCharges > 0 &&
+                offset.y == 0 &&
+                offset.x % game.timeOffset == 0 &&
+                offset.x < 0
+            )
             {
                 valid = true;
             }

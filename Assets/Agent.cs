@@ -7,6 +7,7 @@ public class Agent : MonoBehaviour, IPointerClickHandler
 {
     public Board board;
     private Game game;
+    public int timeTravelCharges;
 
     public void OnPointerClick(PointerEventData eventData)
     {

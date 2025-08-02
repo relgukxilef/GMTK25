@@ -9,7 +9,11 @@ public class Game : MonoBehaviour
     public Agent selection;
     public bool playerTurn = true;
     public float enemyTurnTime = 0.0f;
-    public new Camera camera;
+    public new GameObject camera;
+    public int timeOffset, lineOffset;
+    public int timelines = 1;
+
+    // TODO: Allow zooming and panning of camera
 
     // Start is called before the first frame update
     void Start()
