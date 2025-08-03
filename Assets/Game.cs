@@ -15,6 +15,7 @@ public class Game : MonoBehaviour
     public TimeLineSplit timeLineSplit;
     public List<Enemy> capturableEnemies;
     public int captureCount = 0;
+    public GameObject victoryScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,10 @@ public class Game : MonoBehaviour
     void Update()
     {
         secondsSinceTurn += Time.deltaTime;
+        if (captureCount >= 1)
+        {
+            victoryScreen.SetActive(true);
+        }
     }
 
     void Awake()
