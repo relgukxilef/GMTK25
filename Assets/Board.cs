@@ -24,6 +24,8 @@ public class Board : MonoBehaviour
         foreach (var room in GetComponentsInChildren<Room>())
         {
             rooms.Add(room.Position, room);
+            if (room.agents.Count > 0)
+                continue;
             room.board = this;
             room.game = game;
             room.agents = new List<Agent>();

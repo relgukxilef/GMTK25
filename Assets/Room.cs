@@ -111,16 +111,12 @@ public class Room : MonoBehaviour, IPointerClickHandler
         spriteRenderer.enabled = valid;
 
         /*
-        Instantiate copies fields, so the agents/enemies arrays in room point
-        to the original agents/enemies instead of the ones belonging to the copy
-        of room. So Awake has to fix the arrays. But the order of objects in
+        Instantiate copies fields, so the agents/enemies arrays in room 
+        already point to the agents/enemies. 
+        So Awake ends up recreating the arrays. But the order of objects in
         Awake is undefined, so agents would randomly swap places when the board
         is copied if we run this code for frozen boards. 
-        TODO: this also freezes agents mid-animation D:
         */
-        if (board.frozen)
-            return;
-
         for (int i = 0; i < agents.Count; i++)
         {
             var agent = agents[i];
