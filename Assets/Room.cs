@@ -99,8 +99,9 @@ public class Room : MonoBehaviour, IPointerClickHandler
                 // Or would traveling into the future be cool?
                 if (
                     agent.timeTravelCharges > 0 &&
-                    offset.y == 0 &&
-                    offset.x == 0
+                    offset == new Vector2Int() &&
+                    board.transform.localPosition.y == agent.board.transform.localPosition.y &&
+                    board.transform.localPosition.x < agent.board.transform.localPosition.x
                 )
                 {
                     valid = true;
