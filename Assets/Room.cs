@@ -107,7 +107,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
             }
         }
 
-        spriteRenderer.enabled = valid;
+        spriteRenderer.gameObject.SetActive(valid);
 
         /*
         Instantiate copies fields, so the agents/enemies arrays in room 

@@ -9,7 +9,7 @@ public class TimeLineSplit : MonoBehaviour
     void Start()
     {
         top.transform.localPosition =
-            new Vector3(0.4f, height + 0.5f, 2);
+            new Vector3(0.2f, height + 0.5f, 2);
         top.size = new Vector2(2, height + 1);
     }
 
