@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[Serializable]
 public struct ConsistentRandom
 {
     public uint seed;
@@ -63,6 +64,11 @@ public class Enemy : MonoBehaviour
             new(1, 0), new(-1, 0), new(0, 1), new(0, -1),
         };
         Array.Sort(directions, (a, b) => random.Range(-1, 1));
+        
+        if (room.agents.Count > 0)
+        {
+            game.capturableEnemies.Remove(this);
+        }
 
         foreach (var direction in directions)
         {
@@ -71,6 +77,11 @@ public class Enemy : MonoBehaviour
 
             Room += direction;
             break;
+        }
+
+        if (room.agents.Count > 0)
+        {
+            game.capturableEnemies.Add(this);
         }
     }
 }

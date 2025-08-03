@@ -13,6 +13,7 @@ public class Game : MonoBehaviour
     public int timelines = 1;
     public GameObject timeLineSprite;
     public TimeLineSplit timeLineSplit;
+    public List<Enemy> capturableEnemies;
 
     // Start is called before the first frame update
     void Start()

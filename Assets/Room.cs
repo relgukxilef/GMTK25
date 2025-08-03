@@ -66,7 +66,6 @@ public class Room : MonoBehaviour, IPointerClickHandler
         agent.Room = Position;
         game.selection = null;
 
-        // TODO: This appears to only move the current timeline
         var enemies = new List<Enemy>(target.rooms[Position].enemies);
         foreach (var enemy in enemies)
         {
@@ -95,8 +94,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
                 {
                     valid = true;
                 }
-                // TODO: don't allow traveling into the future or across timelines
-                // Or would traveling into the future be cool?
+                // Would traveling into the future be cool?
                 if (
                     agent.timeTravelCharges > 0 &&
                     offset == new Vector2Int() &&
