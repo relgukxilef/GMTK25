@@ -1,14 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Agent : MonoBehaviour, IPointerClickHandler
+public class Enemy : MonoBehaviour
 {
-    public Board board;
     public Game game;
-    public int timeTravelCharges;
-
+    public Board board;
     private Room room;
 
     public Vector2Int Room
@@ -17,30 +14,18 @@ public class Agent : MonoBehaviour, IPointerClickHandler
         set
         {
             if (room)
-                room.agents.Remove(this);
+                room.enemies.Remove(this);
             room = board.rooms[value];
-            if (!room.agents.Contains(this))
+            if (!room.enemies.Contains(this))
                 // Instantiate seems to copy some members and not others?
-                room.agents.Add(this);
+                room.enemies.Add(this);
         }
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (board.frozen)
-            return;
-        if (game.selection)
-        {
-            game.selection = null;
-            return;
-        }
-
-        game.selection = this;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame

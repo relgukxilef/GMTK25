@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
 
 public class Room : MonoBehaviour, IPointerClickHandler
@@ -8,7 +10,13 @@ public class Room : MonoBehaviour, IPointerClickHandler
     public Board board;
     public SpriteRenderer spriteRenderer;
     public bool valid = false;
-    private Game game;
+    public Game game;
+
+    public List<Agent> agents;
+    public List<Enemy> enemies;
+
+    public Vector2Int Position =>
+        Vector2Int.RoundToInt(transform.localPosition);
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -20,14 +28,14 @@ public class Room : MonoBehaviour, IPointerClickHandler
         var target = board;
 
         // copy source
-        Instantiate<Board>(source).frozen = true;
+        Instantiate<Board>(source, game.transform).frozen = true;
         // move source to next time step, maybe animated
         source.transform.position += new Vector3(game.timeOffset, 0, 0);
         // copy target to know timeline if it's in the past
         if (target.frozen)
         {
             var startLine = target.transform.position;
-            target = Instantiate<Board>(target);
+            target = Instantiate<Board>(target, game.transform);
             var position = target.transform.position;
             position.y = game.lineOffset * game.timelines;
             position.x += game.timeOffset;
@@ -41,36 +49,41 @@ public class Room : MonoBehaviour, IPointerClickHandler
             split.transform.position = startLine;
         }
         // move agent, maybe animated
-        agent.transform.parent = target.transform;
-        agent.transform.localPosition = transform.localPosition;
         agent.board = target;
+        agent.transform.parent = target.transform;
+        agent.Room = Position;
         game.selection = null;
+
+        // TODO: move enemies
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        game = board.game;
     }
 
     // Update is called once per frame
     void Update()
     {
         valid = false;
-        if (game.selection)
+        var agent = game.selection;
+        if (agent)
         {
-            Vector2 offset =
-                transform.position -
-                game.selection.gameObject.transform.position;
-            if (Math.Abs(offset.x) + Math.Abs(offset.y) == 1)
+            var offset = Position - agent.Room;
+            if (
+                agent.board == board &&
+                Math.Abs(offset.x) + Math.Abs(offset.y) == 1
+            )
             {
                 valid = true;
             }
+            // TODO: don't allow traveling into the future or across timelines
+            // Or would traveling into the future be cool?
             if (
-                game.selection.timeTravelCharges > 0 &&
+                agent.timeTravelCharges > 0 &&
                 offset.y == 0 &&
-                offset.x % game.timeOffset == 0 &&
-                offset.x < 0
+                offset.x == 0
             )
             {
                 valid = true;
@@ -78,5 +91,23 @@ public class Room : MonoBehaviour, IPointerClickHandler
         }
 
         spriteRenderer.enabled = valid;
+
+        for (int i = 0; i < agents.Count; i++)
+        {
+            Assert.AreEqual(agents[i].board, board);
+            agents[i].transform.localPosition =
+                transform.localPosition +
+                new Vector3(-0.5f + (i + 1f) /
+                (agents.Count + enemies.Count + 1), 0);
+        }
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            Assert.AreEqual(enemies[i].board, board);
+            enemies[i].transform.localPosition =
+                transform.localPosition +
+                new Vector3(-0.5f + (agents.Count + i + 1f) /
+                (agents.Count + enemies.Count + 1), 0);
+        }
     }
 }
