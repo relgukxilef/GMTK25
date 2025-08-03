@@ -39,18 +39,22 @@ public class Room : MonoBehaviour, IPointerClickHandler
             game.timelines++;
             target.frozen = false;
             agent.timeTravelCharges--;
-            var split = Instantiate(game.timeLineSplit);
+            var split = Instantiate(game.timeLineSplit, game.transform);
             split.height = (int)(position.y - startLine.y);
             split.width = game.timeOffset;
             split.transform.position = startLine;
         }
+        else
+        {
+            game.transform.position -= new Vector3(game.timeOffset, 0, 0);
+        }
+        
         // move agent, maybe animated
         agent.board = target;
         agent.transform.parent = target.transform;
         agent.Room = Position;
         game.selection = null;
 
-        // TODO: move enemies
         var enemies = new List<Enemy>(target.rooms[Position].enemies);
         foreach (var enemy in enemies)
         {
