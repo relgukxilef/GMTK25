@@ -7,8 +7,7 @@ public class Game : MonoBehaviour
     public float enemyTurnSpeed = 0.5f;
 
     public Agent selection;
-    public bool playerTurn = true;
-    public float enemyTurnTime = 0.0f;
+    public float secondsSinceTurn = 0.0f;
     public new GameObject camera;
     public int timeOffset, lineOffset;
     public int timelines = 1;
@@ -24,7 +23,7 @@ public class Game : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        secondsSinceTurn += Time.deltaTime;
     }
 
     void Awake()
@@ -38,9 +37,10 @@ public class Game : MonoBehaviour
 
     public void BeginMove(Board board)
     {
+        secondsSinceTurn = 0;
         // copy source
         Instantiate<Board>(board, transform).frozen = true;
         // move source to next time step, maybe animated
-        board.transform.position += new Vector3(timeOffset, 0, 0);
+        board.transform.localPosition += new Vector3(timeOffset, 0, 0);
     }
 }
