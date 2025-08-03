@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour
     public Game game;
     public Board board;
     public ConsistentRandom random;
+    public bool captured;
+    public SpriteRenderer spriteRenderer;
     private Room room;
 
     public Vector2Int Room
@@ -55,11 +57,14 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (captured)
+            spriteRenderer.color -= new Color(1, 1, 1, Time.deltaTime);
     }
 
     public void Step()
     {
+        if (captured)
+            return;
         Vector2Int[] directions = {
             new(1, 0), new(-1, 0), new(0, 1), new(0, -1),
         };

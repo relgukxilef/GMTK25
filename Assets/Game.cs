@@ -14,6 +14,7 @@ public class Game : MonoBehaviour
     public GameObject timeLineSprite;
     public TimeLineSplit timeLineSplit;
     public List<Enemy> capturableEnemies;
+    public int captureCount = 0;
 
     // Start is called before the first frame update
     void Start()

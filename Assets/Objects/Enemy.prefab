@@ -99,3 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game: {fileID: 0}
   board: {fileID: 0}
+  random:
+    seed: 0
+  captured: 0
+  spriteRenderer: {fileID: 8484523616292426161}
