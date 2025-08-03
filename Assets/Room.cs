@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
@@ -24,13 +23,10 @@ public class Room : MonoBehaviour, IPointerClickHandler
             return;
 
         var agent = game.selection;
-        var source = agent.board;
         var target = board;
 
-        // copy source
-        Instantiate<Board>(source, game.transform).frozen = true;
-        // move source to next time step, maybe animated
-        source.transform.position += new Vector3(game.timeOffset, 0, 0);
+        game.BeginMove(agent.board);
+
         // copy target to know timeline if it's in the past
         if (target.frozen)
         {
@@ -55,7 +51,11 @@ public class Room : MonoBehaviour, IPointerClickHandler
         game.selection = null;
 
         // TODO: move enemies
-
+        var enemies = new List<Enemy>(target.rooms[Position].enemies);
+        foreach (var enemy in enemies)
+        {
+            enemy.Step();
+        }
     }
 
     // Start is called before the first frame update

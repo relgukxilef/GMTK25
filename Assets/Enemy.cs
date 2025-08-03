@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -25,12 +24,32 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void Step()
+    {
+        Vector2Int[] directions = {
+            new Vector2Int(1, 0),
+            new Vector2Int(-1, 0),
+            new Vector2Int(0, 1),
+            new Vector2Int(0, -1),
+        };
+        Array.Sort(directions, (a, b) => UnityEngine.Random.Range(-1, 1));
+
+        foreach (var direction in directions)
+        {
+            if (!board.rooms.ContainsKey(Room + direction))
+                continue;
+
+            Room += direction;
+            break;
+        }
     }
 }

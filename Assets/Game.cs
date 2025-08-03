@@ -18,12 +18,20 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void BeginMove(Board board)
+    {
+        // copy source
+        Instantiate<Board>(board, transform).frozen = true;
+        // move source to next time step, maybe animated
+        board.transform.position += new Vector3(timeOffset, 0, 0);
     }
 }
