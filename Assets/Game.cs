@@ -27,6 +27,15 @@ public class Game : MonoBehaviour
 
     }
 
+    void Awake()
+    {
+        // TODO: This does not work for levels that already have a history
+        foreach (var enemy in GetComponentsInChildren<Enemy>())
+        {
+            enemy.random.seed = (uint)Random.Range(0, 128);
+        }
+    }
+
     public void BeginMove(Board board)
     {
         // copy source

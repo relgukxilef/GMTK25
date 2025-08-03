@@ -1,10 +1,34 @@
 using System;
 using UnityEngine;
 
+public struct ConsistentRandom
+{
+    public uint seed;
+    public void See(uint value)
+    {
+        seed += value;
+        seed *= 836973217;
+    }
+    public void See(int value)
+    {
+        See((uint)value);
+    }
+    public int Range(uint maxExclusive)
+    {
+        See(1);
+        return (int)(((ulong)seed * maxExclusive) >> 32);
+    }
+    public int Range(int minInclusive, int maxExclusive)
+    {
+        return Range((uint)(maxExclusive - minInclusive)) + minInclusive;
+    }
+}
+
 public class Enemy : MonoBehaviour
 {
     public Game game;
     public Board board;
+    public ConsistentRandom random;
     private Room room;
 
     public Vector2Int Room
@@ -36,12 +60,9 @@ public class Enemy : MonoBehaviour
     public void Step()
     {
         Vector2Int[] directions = {
-            new Vector2Int(1, 0),
-            new Vector2Int(-1, 0),
-            new Vector2Int(0, 1),
-            new Vector2Int(0, -1),
+            new(1, 0), new(-1, 0), new(0, 1), new(0, -1),
         };
-        Array.Sort(directions, (a, b) => UnityEngine.Random.Range(-1, 1));
+        Array.Sort(directions, (a, b) => random.Range(-1, 1));
 
         foreach (var direction in directions)
         {
