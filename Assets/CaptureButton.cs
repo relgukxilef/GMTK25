@@ -19,6 +19,7 @@ public class CaptureButton : MonoBehaviour, IPointerClickHandler
             enemy.captured = true;
             game.transform.localPosition -= new Vector3(game.timeOffset, 0, 0);
             game.captureCount++;
+            game.selection = null;
             // TODO: show victory screen
         }
     }
